@@ -1,3 +1,9 @@
+import 'package:bitcoin_ticker/network_helper.dart';
+
+const String apikey = '1C14E1A8-98FB-467B-A00F-2127531F0511';
+const String coin = 'BTC';
+const String currency = 'USD';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +34,13 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future getCoinData() async {
+    NetworkHelper networkHelper = new NetworkHelper(
+        'https://rest.coinapi.io/v1/exchangerate/$coin/$currency?apikey=$apikey');
+
+    var coinData = await networkHelper.getData();
+
+    return coinData;
+  }
+}
